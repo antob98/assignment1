@@ -6,20 +6,23 @@ The contents of this repository delve into my own solution for the 1st graded as
 Installing and running this code:
 ------------------------------------
 
-To run this code, make sure you have installed Python 2.7, the pygame library, PyPyBox2D, and PyYAML, then simply clone all the contents of this repository in your own repository, go inside the correct folder (where the file assignment_1.py is contained) from the shell and write the command: 
+To run this code, make sure you have installed Python 2.7, the pygame library, PyPyBox2D, and PyYAML, then simply clone all the contents of this repository in your own repository, go inside the correct folder (where the file assignment_1.py is contained) from the shell and write the command:  
 > `python2 run.py assignment_1.py`.
+
 If you haven't downloaded python2, you can do it from the shell in this way:
+
 > `sudo apt install python2`
+
 For other useful info on the simulator used to produce this code, or the installation of the other components required besides python to make it work, you can always refer to the original repository granted to us by our professor. The link to his repository has been already given in the previous paragraph.
 
 ## Objectives and Useful Info:
 
 The code produced for this assignment is contained in the file *assignment_1.py* and has been carried out in python2. Other than that, we produced this README to explain its contents.  
 The assignment was:  
-> Write a python script for achieving this robot’s behaviour:
-> Constrantly drive the robot around the circuit in the counter-clockwise direction and
-> avoid touching the golden boxes. When the robot is close to a silver box, it should 
-> grab it, and move it behind itself.
+> Write a python script for achieving this robot’s behaviour:  
+> Constrantly drive the robot around the circuit in the counter-clockwise direction.  
+> Avoid touching the golden boxes.  
+> When the robot is close to a silver box, it should grab it and move it behind itself.
 
 The code we produced handles all points of the assignment without any problems. There is to note, though, that because of the way we wrote it there is an extremely niche case in which the robot could "turn" to avoid a specific obstacle, inverting its trajectory in the given circuit. The specific case may happen when the robot goes straight into an angle at a perfect 45° angle, being exactly at the same distance from both lateral walls. This uncertainty of its course of actions derives from the fact that in this case it is impossible for the robot to determine where it has to go to remain in counter-clockwise motion without it knowing at every instant its current position and orientation with respect tp the specific circuit. This can be avoided using a different approach, described in the "*Possible Improvements*" section.
 
