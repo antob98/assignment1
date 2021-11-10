@@ -1,10 +1,14 @@
-
-#**Conents of the Assingment_1 Repository**:
-
+Conents of the Assingment_1 Repository:
+==========================================
 
 The contents of this repository delve into my own solution for the 1st graded assignment given to us in the Research Track class of the Robotics Engineering Master course held in Università degli Studi di Genova. The simulator I used has been provided to us by our professor, so if you are interested in the explaination of all its functionalities or want to know more about the built-in Robot API you can follow the specifications listed in [CarmineD8's Github Repository](https://github.com/CarmineD8/python_simulator), specifically in the branch "assignment".
 
-##**Objectives and Use-Instructions:**
+Installing and running this code:
+------------------------------------
+
+https://github.com/CarmineD8/python_simulator.git
+
+## Objectives and Use-Instructions:
 
 The code produced for this assignment is contained in the file *assignment_1.py* and has been carried out in python2. Other than that, we produced this README to explain its contents.  
 The assignment was:  
@@ -16,7 +20,7 @@ The code we produced handles all points of the assignment without any problems. 
 
 > To run our code, get in the correct folder from the shell and write the command: `python2 run.py assignment_1.py`.
 
-###**Code Behaviour (flowchart):**
+### Code Behaviour (pseudocode):
 
 The robot keeps looping 8 separate checks, each leading to their own instructions. 
 While looping:
@@ -24,42 +28,42 @@ While looping:
 - If a silver token is in the frontal cone, take its position and orientation.
 - If a golden token is in the left cone, take its position and orientation. 
 - If a golden token is in the right cone, take its position and orientation.
-- If a golden token the distance of the golden token in front is less than set_dist:
-   If there was a golden token in the left cone and its distance was less than 2: 
-    If there also was a golden token in the right cone and its distance was less than 2: 
-     If the distance of the right token was greater than the distance of the left token:
-      Turn right.
-     Else if the distance of the left token was greater than the distance of the right token: 
-      Turn left.
-    Else:
-     Turn right.
-   Else if there was a golden token in the right cone and its distance was less than 2: 
-    Turn left.
-   Else:
-    If the orientation angle of the frontal token is lower than -a_th:
-     Turn right.
-    Else if the orientation angle of the frontal token is greater than a_th:
-     Turn left. 
-    Else if the orientation angle of the frontal token is greater than or equal to -a_th and strictly lower than 0:
-     Turn right.
-    Else:
-     Turn left.
-- Else if no silver token has been detected:
-   Drive forward.
-- Else if there was a silver token and its distance was less than d_th:
-   If you can grab it:
-    Turn around, release it, then turn around again.
-   Else: 
-    print "can't grab it yet" 
-- Else:
-   If the orientation angle of the token is lower than -a_th:
-    Turn left.
-   If the orientation angle of the token is greater than a_th:
-    Turn right.
-   Else:
+- If a golden token the distance of the golden token in front is less than set_dist:  
+   If there was a golden token in the left cone and its distance was less than 2:  
+    If there also was a golden token in the right cone and its distance was less than 2:  
+     If the distance of the right token was greater than the distance of the left token:  
+      Turn right.  
+     Else if the distance of the left token was greater than the distance of the right token:  
+      Turn left.  
+    Else:  
+     Turn right.  
+   Else if there was a golden token in the right cone and its distance was less than 2:  
+    Turn left.  
+   Else:  
+    If the orientation angle of the frontal token is lower than -a_th:  
+     Turn right.  
+    Else if the orientation angle of the frontal token is greater than a_th:  
+     Turn left.  
+    Else if the orientation angle of the frontal token is greater than or equal to -a_th and strictly lower than 0:  
+     Turn right.  
+    Else:  
+     Turn left.  
+- Else if no silver token has been detected:  
+   Drive forward.  
+- Else if there was a silver token and its distance was less than d_th:  
+   If you can grab it:  
+    Turn around, release it, then turn around again.  
+   Else:  
+    print "can't grab it yet"  
+- Else:  
+   If the orientation angle of the token is lower than -a_th:  
+    Turn left.  
+   If the orientation angle of the token is greater than a_th:  
+    Turn right.  
+   Else:  
     Drive forward.
 
-####**Possible Improvements:**
+#### Possible Improvements:
 
 As we previously stated, there is one uncertainty in the robot's behaviour that could be improved upon. It is due to the nature of our coding: since we were specifically asked to build it with functions and types of instructions seen during the course, we didn't use all the characteristics of the robot written in the file containing its class definition. For this reason, even if the class robot provides the possibility to know the robot-instance's position and orientation at each time instant, we chose not to use them in our code. However, this creates a drawback: if the robot goes straight into a corner at a 45° angle, thus perceiving the same distance from both lateral walls, it will give priority to left-turning. If we are lucky, it will be the right choice to preserve counter-clockwise motion, but we cannot really know in advance when this will happen. When it does, the robot may change its moving direction and start moving clockwise (because maybe in that situation to keep moving counter-clockwise in the circuit it would've needed to go right). However, this isn't a critical issue (since the robot will keep avoiding golden tokens and grab silver ones without problems) and as far as we tested, given the configuration of this particular circuit this inconvenience may very well never happen (it would be almost impossible for the robot to get in that perfect orientation), so we left the code as is.  
 To solve this issue we recommend either:
