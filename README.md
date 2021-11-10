@@ -29,40 +29,40 @@ While looping:
 - If a silver token is in the frontal cone, take its position and orientation.
 - If a golden token is in the left cone, take its position and orientation. 
 - If a golden token is in the right cone, take its position and orientation.
-- If a golden token the distance of the golden token in front is less than set_dist:
-        If there was a golden token in the left cone and its distance was less than 2:  
-         If there also was a golden token in the right cone and its distance was less than 2:  
-          If the distance of the right token was greater than the distance of the left token:  
-           Turn right.  
-          Else if the distance of the left token was greater than the distance of the right token:  
-           Turn left.  
-         Else:  
-          Turn right.  
-        Else if there was a golden token in the right cone and its distance was less than 2:  
-         Turn left.  
-        Else:  
-         If the orientation angle of the frontal token is lower than -a_th:  
-          Turn right.  
-         Else if the orientation angle of the frontal token is greater than a_th:  
-          Turn left.  
-         Else if the orientation angle of the frontal token is greater than or equal to -a_th and strictly lower than 0:  
-          Turn right.  
-         Else:  
-          Turn left.  
+- If a golden token the distance of the golden token in front is less than set_dist:  
+___If there was a golden token in the left cone and its distance was less than 2:  
+_____If there also was a golden token in the right cone and its distance was less than 2:  
+_______If the distance of the right token was greater than the distance of the left token:  
+_________Turn right.  
+_______Else if the distance of the left token was greater than the distance of the right token:  
+_________Turn left.  
+_______Else:  
+_________Turn right.  
+_____Else if there was a golden token in the right cone and its distance was less than 2:  
+_______Turn left.  
+_____Else:  
+_______If the orientation angle of the frontal token is lower than -a_th:  
+_________Turn right.  
+_______Else if the orientation angle of the frontal token is greater than a_th:  
+_________Turn left.  
+_______Else if the orientation angle of the frontal token is greater than or equal to -a_th and strictly lower than 0:  
+_________Turn right.  
+_______Else:  
+_________Turn left.  
 - Else if no silver token has been detected:  
-        Drive forward.  
+___Drive forward.  
 - Else if there was a silver token and its distance was less than d_th:  
-        If you can grab it:  
-         Turn around, release it, then turn around again.  
-        Else:  
-         print "can't grab it yet"  
+___If you can grab it:  
+_____Turn around, release it, then turn around again.  
+___Else:  
+_____print "can't grab it yet"  
 - Else:  
-        If the orientation angle of the token is lower than -a_th:  
-         Turn left.  
-        If the orientation angle of the token is greater than a_th:  
-         Turn right.  
-        Else:  
-         Drive forward.
+___If the orientation angle of the token is lower than -a_th:  
+_____Turn left.  
+___If the orientation angle of the token is greater than a_th:  
+_____Turn right.  
+___Else:  
+_____Drive forward.
 
 #### Possible Improvements:
 
