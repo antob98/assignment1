@@ -15,7 +15,8 @@ The assignment was:
 > Write a python script for achieving this robot’s behaviour:
 > Constrantly drive the robot around the circuit in the counter-clockwise direction and
 > avoid touching the golden boxes. When the robot is close to a silver box, it should 
-> grab it, and move it behind itself.  
+> grab it, and move it behind itself.
+
 The code we produced handles all points of the assignment without any problems. There is to note, though, that because of the way we wrote it there is an extremely niche case in which the robot could "turn" to avoid a specific obstacle, inverting its trajectory in the given circuit. The specific case may happen when the robot goes straight into an angle at a perfect 45° angle, being exactly at the same distance from both lateral walls. This uncertainty of its course of actions derives from the fact that in this case it is impossible for the robot to determine where it has to go to remain in counter-clockwise motion without it knowing at every instant its current position and orientation with respect tp the specific circuit. This can be avoided using a different approach, described in the "*Possible Improvements*" section.
 
 > To run our code, get in the correct folder from the shell and write the command: `python2 run.py assignment_1.py`.
@@ -28,40 +29,40 @@ While looping:
 - If a silver token is in the frontal cone, take its position and orientation.
 - If a golden token is in the left cone, take its position and orientation. 
 - If a golden token is in the right cone, take its position and orientation.
-- If a golden token the distance of the golden token in front is less than set_dist:  
-   If there was a golden token in the left cone and its distance was less than 2:  
-    If there also was a golden token in the right cone and its distance was less than 2:  
-     If the distance of the right token was greater than the distance of the left token:  
-      Turn right.  
-     Else if the distance of the left token was greater than the distance of the right token:  
-      Turn left.  
-    Else:  
-     Turn right.  
-   Else if there was a golden token in the right cone and its distance was less than 2:  
-    Turn left.  
-   Else:  
-    If the orientation angle of the frontal token is lower than -a_th:  
-     Turn right.  
-    Else if the orientation angle of the frontal token is greater than a_th:  
-     Turn left.  
-    Else if the orientation angle of the frontal token is greater than or equal to -a_th and strictly lower than 0:  
-     Turn right.  
-    Else:  
-     Turn left.  
+- If a golden token the distance of the golden token in front is less than set_dist:
+        If there was a golden token in the left cone and its distance was less than 2:  
+         If there also was a golden token in the right cone and its distance was less than 2:  
+          If the distance of the right token was greater than the distance of the left token:  
+           Turn right.  
+          Else if the distance of the left token was greater than the distance of the right token:  
+           Turn left.  
+         Else:  
+          Turn right.  
+        Else if there was a golden token in the right cone and its distance was less than 2:  
+         Turn left.  
+        Else:  
+         If the orientation angle of the frontal token is lower than -a_th:  
+          Turn right.  
+         Else if the orientation angle of the frontal token is greater than a_th:  
+          Turn left.  
+         Else if the orientation angle of the frontal token is greater than or equal to -a_th and strictly lower than 0:  
+          Turn right.  
+         Else:  
+          Turn left.  
 - Else if no silver token has been detected:  
-   Drive forward.  
+        Drive forward.  
 - Else if there was a silver token and its distance was less than d_th:  
-   If you can grab it:  
-    Turn around, release it, then turn around again.  
-   Else:  
-    print "can't grab it yet"  
+        If you can grab it:  
+         Turn around, release it, then turn around again.  
+        Else:  
+         print "can't grab it yet"  
 - Else:  
-   If the orientation angle of the token is lower than -a_th:  
-    Turn left.  
-   If the orientation angle of the token is greater than a_th:  
-    Turn right.  
-   Else:  
-    Drive forward.
+        If the orientation angle of the token is lower than -a_th:  
+         Turn left.  
+        If the orientation angle of the token is greater than a_th:  
+         Turn right.  
+        Else:  
+         Drive forward.
 
 #### Possible Improvements:
 
