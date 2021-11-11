@@ -80,7 +80,7 @@ def rot_funct(x,y):
     if y<-a_th: 
         print("turn left")
         turn(-2,0.5)
-    if y>a_th:
+    elif y>a_th:
         print("turn right")
         turn(+2,0.5)
     else:
@@ -145,9 +145,9 @@ set_dist=0.8 #threshold for distance control for golden tokens
 while 1:
     #the angles used to shape the frontal and lateral cones of vision of the robot were the result of multiple tests. These ones gave the best performance and reliability overall.
     c,d=find_wall(-40,40)
-    a,b=find_silver_token(-30,30)
-    dest_sx,rot_sx=find_wall(-105,-80)
-    dest_dx,rot_dx=find_wall(80,105)
+    a,b=find_silver_token(-40,40)
+    dest_sx,rot_sx=find_wall(-105,-75)
+    dest_dx,rot_dx=find_wall(75,105)
     
     #priorities and behaviour
     if c<set_dist: #priority is given to safety: 
