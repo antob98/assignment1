@@ -107,7 +107,7 @@ def grab_if(b,c,d):
 
 However, there is a case in which it may not be able to keep the same direction: if the nearest perceived golden block is directly in its front, with 0 as relative orientation and the same perceived distance from the lateral walls, then it will always prioritize left movement (because there's no way to tell which would be a correct direction).'''
 def move_funct(b,c,d):
-    print("iceberg detected")
+    print("wall detected")
     if dest_sx!=-1 and dest_sx<2:
         if dest_dx!=-1 and dest_dx<2:
             print("surrounded!")
@@ -126,18 +126,18 @@ def move_funct(b,c,d):
         turn(-15,1)
     
     else:
-        print("just forward!")
-        if d<-a_th:
+        print("dead end forward!")
+        if d<-5:
             print("avoiding collision: turn right")
             turn(+15,1)
-        elif d>a_th:
+        elif d>5:
             print("avoiding collision: turn left")
             turn(-15,1)
-        elif -a_th<=d<0:
-            print("iceberg in front! turn right!")
+        elif -5<=d<0:
+            print("wall straight ahead! turn right!")
             turn(+15,1)
         else:
-            print("iceberg in front! turn left!")
+            print("wall straight ahead! turn left!")
             turn(-15,1)
 
 
@@ -159,7 +159,6 @@ while 1:
     elif a<d_th:
         grab_if(b,c,d)
     else:
-        print("moving!")
         rot_funct(a,b)
 
 
