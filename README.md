@@ -100,13 +100,9 @@ _________Turn right.
 _____Else if there was a golden token in the right cone and its distance was less than 2:  
 _______Turn left.  
 _____Else:  
-_______If the orientation angle of the frontal token is lower than -a_th:  
+_______If the orientation angle of the frontal token is between 0 and the left angle of the cone:  
 _________Turn right.  
-_______Else if the orientation angle of the frontal token is greater than a_th:  
-_________Turn left.  
-_______Else if the orientation angle of the frontal token is greater than or equal to -a_th and strictly lower than 0:  
-_________Turn right.  
-_______Else:  
+_______Else if the orientation angle of the frontal token is 0 or between 0 and the right angle of the cone:  
 _________Turn left.  
 
 - Else if no silver token has been detected:  
@@ -117,6 +113,12 @@ ___If you can grab it:
 _____Turn around, release it, then turn around again.  
 ___Else:  
 _____print "can't grab it yet"  
+_____If the orientation angle of the token is lower than -a_th:  
+_______Turn left.  
+_____Else if the orientation angle of the token is greater than a_th:  
+_______Turn right.  
+_____Else (this else won't be used, this is just a check to allow the robot to correctly orientate itself with respect to the silver token):  
+_______Drive forward.  
 
 - Else:  
 ___If the orientation angle of the token is lower than -a_th:  

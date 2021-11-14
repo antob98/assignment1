@@ -48,12 +48,12 @@ Its angular range of vision is 360 normally, and you can manually set the distan
 
 Whenever the robot sees silver tokens in its cone of vision, this function calculates which is the nearest one and returns its distance and orientation with respect to the robot. Otherwise, in case no silver tokens are detected in the cone, it returns -1.'''
 def find_silver_token(ext1,ext2):
-    dist=2
+    dist=3
     for token in R.see():
         if token.dist < dist and token.info.marker_type is MARKER_TOKEN_SILVER and ext1 <= token.rot_y <= ext2:
             dist=token.dist
 	    rot_y=token.rot_y
-    if dist==2:
+    if dist==3:
         return -1, -1
     else:
         return dist, rot_y
@@ -76,11 +76,11 @@ def find_wall(ext1,ext2):
         return dist, rot_y
 
 '''This function allows the robot to correctly orientate itself with respect to an object placed in the x,y position. We will use it to get near the silver tokens in the correct ofientation to allow the robot to grab them.'''       
-def rot_funct(x,y):
-    if y<-a_th: 
+def rot_funct(b):
+    if b<-a_th: 
         print("turn left")
         turn(-2,0.5)
-    elif y>a_th:
+    elif b>a_th:
         print("turn right")
         turn(+2,0.5)
     else:
@@ -89,7 +89,7 @@ def rot_funct(x,y):
 
 
 '''Function that allows the robot to grab the token and leave it behind itself when it's ready to do so. The threshold for distance control that allows the class function "grab" to work is used in the main loop of our code.'''
-def grab_if(b,c,d):
+def grab_if(b):
     print("found it")
     if R.grab():
         print("grabbed it")
@@ -98,6 +98,8 @@ def grab_if(b,c,d):
         turn(-30,2)
     else:
         print("can't grab it yet")
+        rot_funct(b); #to avoid it getting stuck if not correctly orientated yet
+        
 
 
 '''Function used to avoid obstacles (golden markers) and choose how to move based on the actual position and orientation of the robot with respect to the surrounding golden blocks.
@@ -106,7 +108,7 @@ def grab_if(b,c,d):
 - If the obstacle is perceived just in front, it will try to avoid it based on its relative orientation, trying to keep the same motion direction (counter-clockwise). 
 
 However, there is a case in which it may not be able to keep the same direction: if the nearest perceived golden block is directly in its front, with 0 as relative orientation and the same perceived distance from the lateral walls, then it will always prioritize left movement (because there's no way to tell which would be a correct direction).'''
-def move_funct(b,c,d):
+def move_funct(dest_dx,dest_sx,d):
     print("wall detected")
     if dest_sx!=-1 and dest_sx<2:
         if dest_dx!=-1 and dest_dx<2:
@@ -127,38 +129,32 @@ def move_funct(b,c,d):
     
     else:
         print("dead end forward!")
-        if d<-5:
+        if -40<=d<0:
             print("avoiding collision: turn right")
-            turn(+15,1)
-        elif d>5:
-            print("avoiding collision: turn left")
-            turn(-15,1)
-        elif -5<=d<0:
-            print("wall straight ahead! turn right!")
-            turn(+15,1)
+            turn(+30,1)
         else:
-            print("wall straight ahead! turn left!")
-            turn(-15,1)
+            print("avoiding collision: turn left")
+            turn(-30,1)
 
 
 set_dist=0.8 #threshold for distance control for golden tokens
 while 1:
     #the angles used to shape the frontal and lateral cones of vision of the robot were the result of multiple tests. These ones gave the best performance and reliability overall.
     c,d=find_wall(-40,40)
-    a,b=find_silver_token(-40,40)
+    a,b=find_silver_token(-30,30)
     dest_sx,rot_sx=find_wall(-105,-75)
     dest_dx,rot_dx=find_wall(75,105)
     
     #priorities and behaviour
     if c<set_dist: #priority is given to safety: 
     #the robot should always avoid obstacles first
-        move_funct(b,c,d)
+        move_funct(dest_dx,dest_sx,d)
     elif a==-1:
         print("I can't see any silver token")
         drive(50,0.1)     
     elif a<d_th:
-        grab_if(b,c,d)
+        grab_if(b)
     else:
-        rot_funct(a,b)
+        rot_funct(b)
 
 
